@@ -17,6 +17,7 @@ async function createWindow() {
   win.loadFile('index.html');
 
   win.once('ready-to-show', async () => {
+    win.webContents.send('currencies');
     win.show();
   })
 }
