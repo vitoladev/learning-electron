@@ -1,5 +1,6 @@
 const { ipcRenderer } = require('electron');
 const container = document.querySelector('.currencies');
+const atualizarBtn = document.querySelector('#atualizarBtn');
 
 ipcRenderer.on('currencies', async () => {
 
@@ -26,3 +27,7 @@ ipcRenderer.on('currencies', async () => {
     container.appendChild(element);
   }
 });
+
+atualizarBtn.addEventListener('click', () => {
+  ipcRenderer.send('reload-win');
+})

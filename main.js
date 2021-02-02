@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 
 require("electron-reload")(__dirname, {
   electron: require(`${__dirname}/node_modules/electron`),
@@ -25,6 +25,11 @@ function createWindow() {
 }
 
 app.whenReady().then(createWindow)
+
+ipcMain.on('reload-win', () => {
+    window.show();
+    window.reload();
+})
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
