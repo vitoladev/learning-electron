@@ -4,8 +4,10 @@ require("electron-reload")(__dirname, {
   electron: require(`${__dirname}/node_modules/electron`),
 });
 
-async function createWindow() {
-  const win = new BrowserWindow({
+let window;
+
+function createWindow() {
+  window = new BrowserWindow({
     width: 1600,
     height: 900,
     backgroundColor: '#2e2c29',
@@ -14,11 +16,11 @@ async function createWindow() {
     },
     show: false
   })
-  win.loadFile('index.html');
+  window.loadFile('index.html');
 
-  win.once('ready-to-show', async () => {
-    win.webContents.send('currencies');
-    win.show();
+  window.on('ready-to-show', () => {
+    window.webContents.send('currencies');
+    window.show();
   })
 }
 
